@@ -7,8 +7,8 @@ from typing import Literal
 from hdbcli import dbapi
 from dotenv import load_dotenv
 import sys
-# import requests
-# from lxml import etree
+import requests
+from lxml import etree
 # import xml.etree.ElementTree as ET
 # import time
 import os
@@ -273,41 +273,41 @@ def cargar_errores(df):
 # ### TABLEAU ### 
 
 
-# def get_token_tableau():
-#     version_api = os.getenv("tableau_version_api")
-#     server = os.getenv("tableau_server")
-#     token_name = os.getenv("tableau_token_name")
-#     token_secret = os.getenv("tableau_token_secret")
-#     site = os.getenv("tableau_site")
-#     url = f"{server}/api/{version_api}/auth/signin"
-#     payload = {
-#         "credentials": {
-#             "personalAccessTokenName": token_name,
-#             "personalAccessTokenSecret": token_secret,
-#             "site": {"contentUrl": site}
-#         }}
+def get_token_tableau():
+    version_api = os.getenv("tableau_version_api")
+    server = os.getenv("tableau_server")
+    token_name = os.getenv("tableau_token_name")
+    token_secret = os.getenv("tableau_token_secret")
+    site = os.getenv("tableau_site")
+    url = f"{server}/api/{version_api}/auth/signin"
+    payload = {
+        "credentials": {
+            "personalAccessTokenName": token_name,
+            "personalAccessTokenSecret": token_secret,
+            "site": {"contentUrl": site}
+        }}
 
-#     headers = {"Content-Type": "application/json"}
-#     response = requests.post(url, json=payload, headers=headers)
-#     xml_response = response.text
-#     root = etree.fromstring(xml_response.encode("utf-8"))
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, json=payload, headers=headers)
+    xml_response = response.text
+    root = etree.fromstring(xml_response.encode("utf-8"))
 
-#     # Namespace
-#     ns = {"t": "http://tableau.com/api"}
-#     token = root.xpath("//t:credentials/@token", namespaces=ns)[0]
-#     site_id = root.xpath("//t:site/@id", namespaces=ns)[0]
-#     return token, site_id
+    # Namespace
+    ns = {"t": "http://tableau.com/api"}
+    token = root.xpath("//t:credentials/@token", namespaces=ns)[0]
+    site_id = root.xpath("//t:site/@id", namespaces=ns)[0]
+    return token, site_id
 
-# def actualizar_libro(wb_id, token, site_id):
-#     version_api = os.getenv("tableau_version_api")
-#     server = os.getenv("tableau_server")
-#     url = f"{server}/api/{version_api}/sites/{site_id}/workbooks/{wb_id}/refresh" 
+def actualizar_libro(wb_id, token, site_id):
+    version_api = os.getenv("tableau_version_api")
+    server = os.getenv("tableau_server")
+    url = f"{server}/api/{version_api}/sites/{site_id}/workbooks/{wb_id}/refresh" 
 
-#     headers = {  "X-Tableau-Auth": token,   "Content-Type": "application/xml"}
-#     body = "<tsRequest/>"
-#     response = requests.post(url, headers=headers, data = body)
-#     response.raise_for_status()
-#     return response
+    headers = {  "X-Tableau-Auth": token,   "Content-Type": "application/xml"}
+    body = "<tsRequest/>"
+    response = requests.post(url, headers=headers, data = body)
+    response.raise_for_status()
+    return response
 
 # def monitorear_trabajo(job_id, token, site_id, time_inicio, time_rep): 
 #     mensaje = ''
