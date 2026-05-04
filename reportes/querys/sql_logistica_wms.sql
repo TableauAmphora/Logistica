@@ -11,6 +11,7 @@ with servicio_transporte as (
 		g4.nombre as localidad,
 		dwh.limpiar_localidad(g4.nombre) as localidad_standar,
 		g4.codigo, 
+		g3.codigo as codigo_comuna_dwh, 
 		g4.lat,
 		g4.lon
 	from 
@@ -62,5 +63,5 @@ select
 from 
     wms left join 
 	servicio_transporte st on st.servicio_id = wms.wms_servicio_dwh left join 
-	localidades l on l.localidad_standar = wms.localidad_standar_wms left join
+	localidades l on l.localidad_standar = wms.localidad_standar_wms and wms.cod_dpa_comuna = l.codigo_comuna_dwh left join
     promesas p on p.servicio_id = st.servicio_id and p.localidad_standar = l.localidad_standar  and wms.fecha_compra between p.fecha_desde and p.fecha_hasta
