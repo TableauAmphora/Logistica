@@ -1,0 +1,11 @@
+config/credenciales.env
+env_log/
+*.bak
+*.egg-info/
+reportes/__pycache__
+origen/__pycache__
+dwh/__pycache__
+ods/__pycache__
+
+
+

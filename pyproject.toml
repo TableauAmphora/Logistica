@@ -1,0 +1,19 @@
+[project]
+name = "config"
+version = "0.1.0"
+description = "Paquete de configuración y conexiones para ETL"
+authors = [{ name="Franco González", email="fgonzalez@amphora.cl" }]
+dependencies = [
+    "pandas",
+    "psycopg2"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["config"]
+
+
+
