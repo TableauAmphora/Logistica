@@ -6,6 +6,7 @@ reportes/__pycache__
 origen/__pycache__
 dwh/__pycache__
 ods/__pycache__
+*.pyc
 
 
 
