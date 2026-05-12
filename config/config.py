@@ -27,37 +27,16 @@ ruta_querys_reportes = os.path.join(raiz, "reportes",  "querys")
 
 ############# SQLs 
 
-# origen 
-sql_wms_rm = os.path.join(ruta_querys_origen, "sql_wms_rm.sql") 
+#origen
 
-
-
-# ods
-sql_stock_sap_reservas_chile_ods =  os.path.join(ruta_querys_ods, "sql_stock_sap_reservas_chile.sql")
-
-# warehouse 
-
-sql_stock_sap_reservas_chile_dwh =  os.path.join(ruta_querys_dwh, "sql_stock_sap_reservas.sql")
-sql_stock_sap_chile_dwh =   os.path.join(ruta_querys_dwh, "sql_stock_sap.sql")
-sql_precios_dwh = os.path.join(ruta_querys_dwh, "sql_precios.sql")
-sql_ofertas_dwh = os.path.join(ruta_querys_dwh, "sql_ofertas.sql")
-sql_precios_vigentes_dwh =  os.path.join(ruta_querys_dwh, "sql_precios_vigentes_dwh.sql")
-sql_ofertas_vigentes_dwh =  os.path.join(ruta_querys_dwh, "sql_ofertas_vigentes_dwh.sql")
-
-sql_relacion_bodegas_detalle_id = os.path.join(ruta_querys_dwh, "sql_relacion_bodega_detalle.sql")
-sql_relacion_bodegas_id = os.path.join(ruta_querys_dwh, "sql_relacion_bodegas.sql")
-sql_relacion_producto_id = os.path.join(ruta_querys_dwh, "sql_relacion_producto.sql")
-sql_relacion_lista_id = os.path.join(ruta_querys_dwh, "sql_relacion_listas_precios.sql")
-sql_relacion_ofertas_id = os.path.join(ruta_querys_dwh, "sql_relacion_ofertas.sql")
-
+sql_wms_rm =  os.path.join(ruta_querys_origen, "sql_wms_rm.sql") 
 
 
 # reportes 
 
+sql_hechos_logisticos = os.path.join(ruta_querys_reportes, "sql_hechos_logisticos.sql") 
 sql_logistica_wms = os.path.join(ruta_querys_reportes, "sql_logistica_wms.sql") 
-sql_promesas = os.path.join(ruta_querys_reportes, "sql_promesas.sql")
-
-
+sql_promesas = os.path.join(ruta_querys_reportes, "sql_promesas.sql") 
 
 #ds 
 
