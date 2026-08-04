@@ -74,3 +74,7 @@ WHERE
     sd.referencia IS NOT NULL AND 
     sd.tipo in ('FRV','OVT') and 
     ped.fecha >= current_date - interval '90 days'
+
+
+
+

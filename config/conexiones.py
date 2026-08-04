@@ -1,6 +1,9 @@
-# conexiones para el proyecto de inventarios. 
+# conexiones para el proyecto de inventarios.
 
-import psycopg2 
+import truststore
+truststore.inject_into_ssl()  # usa el almacen de certificados de Windows (proxy corporativo intercepta TLS), igual que schannel en git
+
+import psycopg2
 import pandas as pd 
 from sqlalchemy import create_engine
 from typing import Literal

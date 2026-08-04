@@ -1,4 +1,11 @@
-# actualizamos stock 
+# actualizamos stock
+
+from config.actualizar import actualizar_repo
+
+try:
+    actualizar_repo()
+except Exception as e:
+    print(f"FAIL actualizar_repo: {e}")
 
 from origen.hechos_query_wms_rm import actualizar_hechos_wms_rm
 from reportes.logistica_wms_rm import actualizar_logistica_wms_rm

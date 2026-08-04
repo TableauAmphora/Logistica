@@ -1,5 +1,6 @@
 config/credenciales.env
 env_log/
+actualizar_repo.log
 *.bak
 *.egg-info/
 reportes/__pycache__
