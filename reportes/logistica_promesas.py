@@ -17,27 +17,20 @@ def actualizar_reporte_promesas(flujo_id= 36, sql = sql_promesas):
         except Exception as e: 
             mensaje = f"Error al obtener datos de promesas. \n {e}"
             raise Exception(mensaje) 
-        try:             
+        try:
+            # Ya no se escribe en dwh: el destino es bdsap (puente temporal
+            # para el Tableau viejo, mientras se resuelve el tema de VPN de
+            # acceso a dwh). No hay ninguna app de reporteria que lea esta
+            # tabla desde dwh (solo Tableau), asi que no hace falta dual
+            # write como en compras/planilla_maestra_sap. El GRANT a
+            # rol_tableau sobre dwh ya no aplica -- Tableau va a conectarse
+            # directo a bdsap con sus propias credenciales.
             print(df.shape)
-            df.to_sql("logistica_promesas", get_engine('dwh'), if_exists = 'replace', index = False, schema = 'reportes') 
-        except Exception as e: 
-            mensaje = f"Error al cargar datos de logistica desde origen a reportes. \n {e}"
-            raise Exception(mensaje) 
-        try: 
-            sql_permisos = """ GRANT USAGE ON SCHEMA reportes TO rol_tableau;
-
-                                GRANT SELECT
-                                ON ALL TABLES IN SCHEMA reportes
-                                TO rol_tableau;
-
-                                ALTER DEFAULT PRIVILEGES
-                                IN SCHEMA reportes
-                                GRANT SELECT ON TABLES TO rol_tableau;
-    	    """
-            ejecutar_query('dwh', sql_permisos)
-        except Exception as e: 
-            mensaje = f"Error al otorgar permisos al usuario de tableau. \n {e}"
-            raise Exception(mensaje) 
+            ejecutar_query('bdsap', "CREATE SCHEMA IF NOT EXISTS reportes")
+            df.to_sql("logistica_promesas", get_engine('bdsap'), if_exists = 'replace', index = False, schema = 'reportes')
+        except Exception as e:
+            mensaje = f"Error al cargar datos de logistica desde origen a bdsap. \n {e}"
+            raise Exception(mensaje)
     except Exception as e: 
         estado = 'FAIL'
         mensaje = str(e)

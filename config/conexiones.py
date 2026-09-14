@@ -34,8 +34,8 @@ load_dotenv(dotenv_path= ruta_credenciales)
 
 
 
-literal_bbdd_fuentes = Literal["dwh", "sap", "wms"]
-literal_bbdd_salidas = Literal["dwh"]
+literal_bbdd_fuentes = Literal["dwh", "sap", "wms", "bdsap"]
+literal_bbdd_salidas = Literal["dwh", "bdsap"]
 class NoDatabaseConfiguredError(Exception):
     pass
 
@@ -48,16 +48,20 @@ def get_conexion(bbdd : literal_bbdd_fuentes):
         conexion = dbapi.connect( address= os.getenv("sap_server"), port= os.getenv("sap_port"),user= os.getenv("sap_user"), password= os.getenv("sap_password"))
     elif bbdd == 'wms':
         conexion = psycopg2.connect(host=os.getenv("wms_server"), database = os.getenv("wms_name") , user= os.getenv("wms_user"), password= os.getenv("wms_password"), port= os.getenv("wms_port"))
-    else: 
+    elif bbdd == 'bdsap':
+        conexion = psycopg2.connect(host=os.getenv("bdsap_server"), database=os.getenv("bdsap_name"), user=os.getenv("bdsap_user"), password=os.getenv("bdsap_password"), port=os.getenv("bdsap_port"))
+    else:
         raise NoDatabaseConfiguredError(f"No se configuró conexión a {bbdd}.")
-    return conexion 
+    return conexion
 
-def get_engine(bbdd:literal_bbdd_salidas): 
+def get_engine(bbdd:literal_bbdd_salidas):
     if bbdd == 'dwh':
-        engine = create_engine(f'postgresql://{os.getenv("dwh_user")}:{os.getenv("dwh_password")}@{os.getenv("dwh_server")}:{os.getenv("dwh_port")}/{os.getenv("dwh_name")}') 
+        engine = create_engine(f'postgresql://{os.getenv("dwh_user")}:{os.getenv("dwh_password")}@{os.getenv("dwh_server")}:{os.getenv("dwh_port")}/{os.getenv("dwh_name")}')
+    elif bbdd == 'bdsap':
+        engine = create_engine(f'postgresql://{os.getenv("bdsap_user")}:{os.getenv("bdsap_password")}@{os.getenv("bdsap_server")}:{os.getenv("bdsap_port")}/{os.getenv("bdsap_name")}')
     else:
         raise NoDatabaseConfiguredError(f"No se configuró engine a {bbdd}.")
-    return engine 
+    return engine
 
 
 def get_consulta(bbdd : literal_bbdd_fuentes, query, params = ()): 
