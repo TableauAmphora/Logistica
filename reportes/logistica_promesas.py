@@ -5,8 +5,14 @@ from datetime import datetime
 
 
 
+# DESACTIVADO 2026-10-14: bdsap se retira y este flujo solo escribia ahi. Se deja como
+# respaldo; para reactivarlo poner ACTIVO = True (y verificar que bdsap este disponible).
+ACTIVO = False
+
 def actualizar_reporte_promesas(flujo_id= 36, sql = sql_promesas):
-    try: 
+    if not ACTIVO:
+        return 'SKIP', 'Desactivado: bdsap se retira (ver ACTIVO)', None
+    try:
         estado = 'OK'
         mensaje = None 
         inicio_log = datetime.now()

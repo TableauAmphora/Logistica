@@ -19,8 +19,8 @@ from datetime import datetime, timedelta
 
 try: 
     actualizar_hechos_wms_rm() 
-    actualizar_logistica_wms_rm()
-except: 
+    # actualizar_logistica_wms_rm()  # DESACTIVADO 2026-10-14: solo escribia en bdsap, que se retira
+except:
     pass 
 
 
