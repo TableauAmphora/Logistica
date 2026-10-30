@@ -29,7 +29,14 @@ ruta_querys_reportes = os.path.join(raiz, "reportes",  "querys")
 
 #origen
 
-sql_wms_rm =  os.path.join(ruta_querys_origen, "sql_wms_rm.sql") 
+sql_wms_rm =  os.path.join(ruta_querys_origen, "sql_wms_rm.sql")
+
+sql_wms_pedido = os.path.join(ruta_querys_origen, "sql_wms_pedido.sql")
+sql_wms_caja = os.path.join(ruta_querys_origen, "sql_wms_caja.sql")
+sql_wms_ot = os.path.join(ruta_querys_origen, "sql_wms_ot.sql")
+sql_wms_oc = os.path.join(ruta_querys_origen, "sql_wms_oc.sql")
+sql_wms_orcom = os.path.join(ruta_querys_origen, "sql_wms_orcom.sql")
+sql_wms_actividades = os.path.join(ruta_querys_origen, "sql_wms_actividades.sql")
 
 
 # reportes 
