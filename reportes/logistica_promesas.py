@@ -1,6 +1,6 @@
 from config.config import sql_promesas
 from config.conexiones import get_consulta, get_engine, cargar_log, ejecutar_query
-from datetime import datetime 
+from datetime import datetime, timezone
 
 
 
@@ -15,7 +15,7 @@ def actualizar_reporte_promesas(flujo_id= 36, sql = sql_promesas):
     try:
         estado = 'OK'
         mensaje = None 
-        inicio_log = datetime.now()
+        inicio_log = datetime.now(timezone.utc)
         try:             
             sql = open(sql, "r", encoding="utf-8").read()
             
@@ -41,7 +41,7 @@ def actualizar_reporte_promesas(flujo_id= 36, sql = sql_promesas):
         estado = 'FAIL'
         mensaje = str(e)
     finally: 
-        fin_log = datetime.now()
+        fin_log = datetime.now(timezone.utc)
         log_id = cargar_log(flujo_id, inicio_log, fin_log,estado=estado, mensaje=mensaje, exit = False)
         return estado, mensaje, log_id
 

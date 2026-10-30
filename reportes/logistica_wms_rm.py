@@ -1,6 +1,6 @@
 from config.config import sql_logistica_wms
 from config.conexiones import get_consulta, get_engine, cargar_log, ejecutar_query
-from datetime import datetime 
+from datetime import datetime, timezone
 
 
 
@@ -15,7 +15,7 @@ def actualizar_logistica_wms_rm(flujo_id= 35, sql = sql_logistica_wms):
     try:
         estado = 'OK'
         mensaje = None 
-        inicio_log = datetime.now()
+        inicio_log = datetime.now(timezone.utc)
         try:             
             sql = open(sql_logistica_wms, "r", encoding="utf-8").read()
             df = get_consulta('dwh',sql) 
@@ -40,7 +40,7 @@ def actualizar_logistica_wms_rm(flujo_id= 35, sql = sql_logistica_wms):
         estado = 'FAIL'
         mensaje = str(e)
     finally: 
-        fin_log = datetime.now()
+        fin_log = datetime.now(timezone.utc)
         log_id = cargar_log(flujo_id, inicio_log, fin_log,estado=estado, mensaje=mensaje, exit = False)
         return estado, mensaje, log_id
 
